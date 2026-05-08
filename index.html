@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kids Care</title>
+<h3>Dr.Ahmed mohamed babiker (Aljmk)<h3>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f9ff;
+}
+
+/* Header */
+header {
+  background: #4CAF50;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+nav a {
+  margin: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+/* Sections */
+section {
+  padding: 20px;
+}
+
+/* Cards */
+.card {
+  background: white;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 10px;
+  box-shadow: 0 0 5px gray;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+/* Images */
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Home Image */
+#home img {
+  width: 300px;
+  display: block;
+  margin: auto;
+  border-radius: 10px;
+}
+
+/* Button */
+button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #45a049;
+}
+
+/* Popup */
+#popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+#popup img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+  <h1>Kids Care</h1>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#age">Age Care</a>
+    <a href="#health">Health</a>
+    <a href="#articles">Articles</a>
+  </nav>
+</header>
+
+<!-- Home -->
+<section id="home">
+  <h2>Welcome</h2>
+  <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9">
+  <button onclick="openDirectImage(this)">View Image</button>
+  <p>Guide for caring kids from age 1 and above.</p>
+</section>
+
+<!-- Age -->
+<section id="age">
+  <h2>Age-Based Care</h2>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba">
+    <button onclick="openImage(this)">View Image</button>
+    <h3>1–2 Years</h3>
+    <p>Healthy food, sleep, and safety.</p>
+  </div>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1503919005314-30d93d07d823">
+    <button onclick="openImage(this)">View Image</button>
+    <h3>3–5 Years</h3>
+    <p>Learning and behavior growth.</p>
+  </div>
+
+</section>
+
+<!-- Health -->
+<section id="health">
+  <h2>Health Care</h2>
+
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1584515933487-779824d29309">
+    <button onclick="openImage(this)">View Image</button>
+    <p>Vaccination and hygiene are important.</p>
+  </div>
+
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1507035895480-2b3156c31fc8">
+  <button onclick="openImage(this)">View Image</button>
+  <h3>Cycling</h3>
+  <p>Cycling improves balance and strengthens the body.</p>
+</div>
+
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1553284966-19b8815c7817">
+  <button onclick="openImage(this)">View Image</button>
+  <h3>Horse Riding</h3>
+  <p>Horse riding builds confidence and coordination.</p>
+</div>
+ <div class="card">
+  <img src="https://images.unsplash.com/photo-1560090995-01632a28895b">
+  <button onclick="openImage(this)">View Image</button>
+  <h3>Swimming</h3>
+  <p>Swimming helps children stay healthy, improves breathing, and builds strong muscles.</p>
+</div>
+<!-- Football -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a">
+  <button onclick="openImage(this)">View Image</button>
+  <h3>Football</h3>
+  <p>Football teaches teamwork, improves fitness, and builds social skills.</p>
+</div>
+
+<!-- Drawing -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0">
+  <button onclick="openImage(this)">View Image</button>
+  <h3>Drawing</h3>
+  <p>Drawing improves creativity and helps children express their ideas.</p>
+</div>
+
+</section>
+
+</section>
+
+<!-- Articles -->
+<section id="articles">
+  <h2>Articles</h2>
+  <div id="article-container"></div>
+</section>
+
+<!-- Popup -->
+<div id="popup" onclick="closeImage()">
+  <img id="popup-img">
+</div>
+
+<script>
+const articles = [
+  {
+    title: "How to Care for a 2-Year-Old",
+    image: "https://images.unsplash.com/photo-1516627145497-ae6968895b74",
+    content: "Maintain sleep schedule and healthy food."
+  },
+  {
+    title: "Healthy Habits",
+    image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352",
+    content: "Teach hygiene and daily exercise."
+  }
+];
+
+const container = document.getElementById("article-container");
+
+articles.forEach(article => {
+  const div = document.createElement("div");
+  div.classList.add("card");
+  div.innerHTML = `
+    <img src="${article.image}">
+    <button onclick="openImage(this)">View Image</button>
+    <h3>${article.title}</h3>
+    <p>${article.content}</p>
+  `;
+  container.appendChild(div);
+});
+
+/* Open Image */
+function openImage(button) {
+  const img = button.previousElementSibling;
+  document.getElementById("popup-img").src = img.src;
+  document.getElementById("popup").style.display = "flex";
+}
+
+/* For Home image */
+function openDirectImage(button) {
+  const img = button.previousElementSibling;
+  document.getElementById("popup-img").src = img.src;
+  document.getElementById("popup").style.display = "flex";
+}
+
+/* Close */
+function closeImage() {
+  document.getElementById("popup").style.display = "none";
+}
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kids Care</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f9ff;
+}
+
+header {
+  background: #4CAF50;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+section {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px gray;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #388e3c;
+}
+
+#popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+#popup img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+  <h1>Kids Activities Program</h1>
+  <p>Fun, Sports, Creative & Relaxing Activities for Kids</p>
+</header>
+
+<section>
+
+<!-- Swimming -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1560090995-01632a28895b">
+  <button onclick="openImage(this)">View Image</button>
+  <h3>Swimming</h3>
+  <p>Swimming helps children stay healthy, improves breathing, and builds strong muscles.</p>
+</div>
+
+<!-- Cycling -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1507035895480-2b3156c31fc8">
+  <button onclick="openImage(this)">View Image</button>
+  <h3>Cycling</h3>
+  <p>Cycling improves balance, strengthens the body, and develops coordination skills.</p>
+</div>
+
+<!-- Football -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a">
+  <button onclick="openImage(this)">View Image</button>
+  <h3>Football</h3>
+  <p>Football teaches teamwork, improves fitness, and builds social confidence.</p>
+</div>
+
+<!-- Horse Riding -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1553284966-19b8815c7817">
+  <button onclick="openImage(this)">View Image</button>
+  <h3>Horse Riding</h3>
+  <p>Horse riding builds confidence, balance, and communication with animals.</p>
+</div>
+
+<!-- Drawing -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0">
+  <button onclick="openImage(this)">View Image</button>
+  <h3>Drawing</h3>
+  <p>Drawing improves creativity and helps children express their imagination.</p>
+</div>
+
+<!-- Basketball -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc">
+  <button onclick="openImage(this)">View Image</button>
+  <h3>Basketball</h3>
+  <p>Basketball improves teamwork, coordination, and physical fitness.</p>
+</div>
+
+<!-- Music / ASMR -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d">
+  <button onclick="openImage(this)">View Image</button>
+  <h3>ASMR Relaxation</h3>
+  <p>Relaxing sounds and soft music help children feel calm and reduce stress.</p>
+</div>
+
+<!-- Yoga -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773">
+  <button onclick="openImage(this)">View Image</button>
+  <h3>Kids Yoga</h3>
+  <p>Yoga improves flexibility, focus, breathing, and emotional balance.</p>
+</div>
+
+<!-- Painting -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b">
+  <button onclick="openImage(this)">View Image</button>
+  <h3>Painting</h3>
+  <p>Painting allows children to explore colors and improve artistic creativity.</p>
+</div>
+
+<!-- Dancing -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d">
+  <button onclick="openImage(this)">View Image</button>
+  <h3>Dancing</h3>
+  <p>Dancing keeps kids active while improving rhythm and self-confidence.</p>
+</div>
+
+<!-- Reading -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794">
+  <button onclick="openImage(this)">View Image</button>
+  <h3>Reading Time</h3>
+  <p>Reading develops imagination, vocabulary, and concentration skills.</p>
+</div>
+
+<!-- Puzzle Games -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1516534775068-ba3e7458af70">
+  <button onclick="openImage(this)">View Image</button>
+  <h3>Puzzle Games</h3>
+  <p>Puzzle games improve problem-solving and critical thinking abilities.</p>
+</div>
+
+</section>
+
+<!-- Popup -->
+<div id="popup" onclick="closeImage()">
+  <img id="popup-img">
+</div>
+
+<script>
+function openImage(button) {
+  const img = button.previousElementSibling;
+  document.getElementById("popup-img").src = img.src;
+  document.getElementById("popup").style.display = "flex";
+}
+
+function closeImage() {
+  document.getElementById("popup").style.display = "none";
+}
+</body>
+</html>
